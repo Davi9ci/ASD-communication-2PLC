@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="MAIN" Id="{ce6f4c4f-7373-443d-941b-4dfa87132aee}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	bBlinker	: BOOL;
+	tonBlink	: TON;
+	sTime :TIME:= T#1S;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+tonBlink(IN := NOT tonBlink.Q, PT := sTime);
+
+IF tonBlink.Q THEN
+	bBlinker := NOT bBlinker;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -3,22 +3,24 @@
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2ee36551-4d4d-4d75-ab37-e29b6fd8ca44}</ProjectGuid>
+    <ProjectGuid>{536cdc15-3d6d-4343-9381-6c9a5e06b2f0}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>true</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>ads</Name>
+    <Name>PLC1ADS</Name>
     <ProgramVersion>3.1.4026.21</ProgramVersion>
-    <Application>{da24d17f-53de-463e-ae20-34c130ccdb24}</Application>
-    <TypeSystem>{ea045691-1097-4cd2-b4a0-49fcc5e11632}</TypeSystem>
-    <Implicit_Task_Info>{2f41294b-1fa3-4da2-b01f-4611481c82e1}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{3e79626a-e6a4-46fa-be44-dd3b2620d0d8}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{50d4719f-be5f-4e49-aa68-2b81f305eb17}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{d7921392-9c11-4ae6-8f52-a1831daa39cc}</LibraryReferences>
-    <Released>false</Released>
+    <Application>{4182c429-98cb-4f70-96dd-01f5b41551c5}</Application>
+    <TypeSystem>{48ea8582-1b05-440a-9d6c-ce70aac78648}</TypeSystem>
+    <Implicit_Task_Info>{6923928a-f54f-4b5c-bfb3-d70e956d2831}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{9a793176-e7e4-424a-b695-d0b3e8107030}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{1a679ea6-6ade-4832-bbe9-76815b6c49c4}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{9bf34e9b-82ea-4f42-9a9f-433fd9423da9}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\ST_motion.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -33,9 +35,13 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderReference Include="BufferManager">
-      <DefaultResolution>BufferManager, * (BeckhoffYonatan)</DefaultResolution>
-      <Namespace>BufferManagerLib</Namespace>
+    <PlaceholderReference Include="Tc2_DataExchange">
+      <DefaultResolution>Tc2_DataExchange, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_DataExchange</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_MC2">
+      <DefaultResolution>Tc2_MC2, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_MC2</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -45,10 +51,6 @@
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="Tc2_Utilities">
-      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc2_Utilities</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
@@ -56,27 +58,21 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ads.tmc">
+    <None Include="Untitled2.tmc">
       <SubType>Content</SubType>
     </None>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{29BD8D0C-3586-4548-BB48-497B9A01693F}</v>
         <o>
           <v n="Name">"{29BD8D0C-3586-4548-BB48-497B9A01693F}"</v>
           <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
-            <v>NamingConventions</v>
-            <o>
-              <v n="Name">"NamingConventions"</v>
-              <d n="SubKeys" t="Hashtable" />
-              <d n="Values" t="Hashtable" />
-            </o>
             <v>Rules</v>
             <o>
               <v n="Name">"Rules"</v>
@@ -116,14 +112,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Boolean">System.Boolean</Type>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

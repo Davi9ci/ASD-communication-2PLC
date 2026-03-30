@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="MAIN" Id="{38bdbffd-b4f3-44f1-871f-189c4c9ee64b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	Axisref 		:AXIS_REF;
+	fbMcPower 		: MC_Power;			// enable and override
+	fbMcMoverel		: MC_MoveRelative;  // Relative motion
+	fbMcStop		: MC_Stop; 
+
+    //ADS Comms Watchdoog
+    fbChkWd      : FB_CheckWatchdog;
+	nWatchdogRx  : UDINT;
+    bCommFault   : BOOL;
+	
+	bEnable 	:BOOL; //Enable Controller
+	bStop		:BOOL;
+	bMoveRel	:BOOL;
+	rVelocity	:REAL;
+	rDistance	:REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Watchdog 
+
+fbChkWd(
+    bEnable       := TRUE,
+    tWatchdogTime := T#5S,
+    nCnt          := nWatchdogRx
+);
+
+bCommFault := fbChkWd.bWatchdog;
+
+IF NOT bCommFault AND nWatchdogRx <> 0 THEN
+fbMcPower(
+	Axis:= Axisref, 
+	Enable:= bEnable, 
+	Enable_Positive:=bEnable , 
+	Enable_Negative:=bEnable , 
+	Override:= 100 );
+
+	fbMcStop(
+	Axis:= Axisref , 
+	Execute:= bStop , 
+	Deceleration:=  , 
+	Jerk:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+	
+	fbMcMoverel(
+	Axis:= Axisref, 
+	Execute:= bMoveRel, 
+	Distance:= rDistance  , 
+	Velocity:= rVelocity, 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	BufferMode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

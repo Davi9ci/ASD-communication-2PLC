@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="MAIN" Id="{d323ce21-d5d1-40bc-a7a6-ce9cd27ae2bd}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	//Write BOOL and REAL
+	fbADSBoolEnable		: FB_WriteBoolOnDelta;
+	fbADSBoolStop 		: FB_WriteBoolOnDelta;
+	fbADSBoolRelMove 	: FB_WriteBoolOnDelta;
+	fbADSRealVelocity	: FB_WriteRealOnDelta;
+	fbADSRealDistance	: FB_WriteRealOnDelta;
+	
+    //ADS Comms Watchdoog
+    fbWrWd : FB_WriteWatchdog;
+
+		
+	bEnabletx 		:BOOL; //Enable Controller
+	bStoptx			: BOOL;
+	bMoveReltx		: BOOL;
+	rVelocitytx		: REAL;
+	rDistancetx		: REAL;
+
+	
+END_VAR
+
+
+
+
+	
+		
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbWrWd(
+    bEnable       := TRUE,
+    sNetId        := '10.200.228.35.1.1',
+    nPort         := 851,
+    sVarName      := 'MAIN.nWatchdogRx',
+    tWatchdogTime := T#1S
+);
+
+fbADSBoolEnable(
+	bEnable:= TRUE , 
+	sNetId:= '10.200.228.35.1.1', 
+	nPort:= 851 , 
+	sVarName:= 'MAIN.bEnable' , 
+	bSignal:= bEnabletx , 
+	tCycleTime:= T#1MS , 
+	bSendNow:= FALSE );
+
+fbADSBoolStop(
+	bEnable:= TRUE , 
+	sNetId:= '10.200.228.35.1.1', 
+	nPort:= 851 , 
+	sVarName:= 'MAIN.bStop' , 
+	bSignal:= bStoptx , 
+	tCycleTime:= T#1MS , 
+	bSendNow:= FALSE );
+	
+fbADSBoolRelMove(
+	bEnable:= TRUE , 
+	sNetId:= '10.200.228.35.1.1', 
+	nPort:= 851 , 
+	sVarName:= 'MAIN.bMoveRel' , 
+	bSignal:= bMoveReltx , 
+	tCycleTime:= T#1MS , 
+	bSendNow:= FALSE );
+	
+fbADSRealVelocity(
+	bEnable:= TRUE, 
+	sNetId:= '10.200.228.35.1.1' , 
+	nPort:= 851 , 
+	sVarName:= 'MAIN.rVelocity' , 
+	fSignal:= rVelocitytx , 
+	fLowerLimit:= 0.01 , 
+	fUpperLimit:= 0.01 , 
+	tCycleTime:= T#10MS, 
+	bSendNow:= FALSE );
+	
+fbADSRealDistance(
+	bEnable:= TRUE, 
+	sNetId:= '10.200.228.35.1.1' , 
+	nPort:= 851 , 
+	sVarName:= 'MAIN.rDistance' , 
+	fSignal:= rDistancetx , 
+	fLowerLimit:= 0.01 , 
+	fUpperLimit:= 0.01 , 
+	tCycleTime:= T#10MS, 
+	bSendNow:= FALSE );]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="237" Count="5" />
+      <LineId Id="312" Count="0" />
+      <LineId Id="248" Count="4" />
+      <LineId Id="255" Count="3" />
+      <LineId Id="282" Count="7" />
+      <LineId Id="263" Count="0" />
+      <LineId Id="290" Count="0" />
+      <LineId Id="292" Count="6" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="299" Count="0" />
+      <LineId Id="265" Count="3" />
+      <LineId Id="271" Count="5" />
+      <LineId Id="300" Count="0" />
+      <LineId Id="302" Count="9" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
